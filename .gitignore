@@ -1,0 +1,12 @@
+# Build outputs
+smartform/build/
+
+# IDE
+smartform/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Gradle (all variants)
+.gradle/
+smartform/.gradle/
