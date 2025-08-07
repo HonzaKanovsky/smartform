@@ -1,5 +1,6 @@
 package com.smartform.smartform.model;
 
+import com.smartform.smartform.dto.CastObceDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -17,4 +18,8 @@ public class CastObce {
     @ManyToOne
     @JoinColumn(name = "obec_kod", referencedColumnName = "kod")
     private Obec obec;
+
+    public CastObceDto toDto() {
+        return new CastObceDto(kod, nazev);
+    }
 }
