@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +35,31 @@ public class ObecService {
 
 
     public ObecResponseDto updateObecData(String obecName) {
+        String tempDir = System.getProperty("java.io.tmpdir");
+        Path zipPath = null;
+        Path xmlPath = null;
 
         try {
-            String tempDir = System.getProperty("java.io.tmpdir");
-            Path zipPath = fileService.downloadFile(obecName, tempDir);
-            Path xmlPath = fileService.unzipFile(zipPath, tempDir);
+            zipPath = fileService.downloadFile(obecName, tempDir);
+            xmlPath = fileService.unzipFile(zipPath, tempDir);
             VymennyFormatXml vf = xmlParsingService.parseXml(xmlPath);
+
+
             return new ObecResponseDto(saveObecXmlToDb(vf));
 
         } catch (IOException | JAXBException | SAXException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (xmlPath != null)
+                    Files.deleteIfExists(xmlPath);
+                if (zipPath != null)
+                    Files.deleteIfExists(zipPath);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 
