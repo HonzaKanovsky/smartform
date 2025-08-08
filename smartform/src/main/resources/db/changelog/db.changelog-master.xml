@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="
+    http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.21.xsd">
+
+    <changeSet id="1" author="honza">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="obec"/>
+                <tableExists tableName="cast_obce"/>
+            </not>
+        </preConditions>
+        <createTable tableName="obec">
+            <column name="kod" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nazev" type="VARCHAR(48)"/>
+        </createTable>
+
+        <createTable tableName="cast_obce">
+            <column name="kod" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nazev" type="VARCHAR(48)"/>
+            <column name="obec_kod" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="cast_obce"
+                baseColumnNames="obec_kod"
+                referencedTableName="obec"
+                referencedColumnNames="kod"
+                constraintName="fk_cast_obce_obec"/>
+    </changeSet>
+
+</databaseChangeLog>
