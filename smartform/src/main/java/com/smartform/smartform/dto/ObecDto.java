@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ObecDto {
-    private String kod;
+    private Integer kod;
     private String nazev;
     private List<CastObceDto> castiObce;
 }

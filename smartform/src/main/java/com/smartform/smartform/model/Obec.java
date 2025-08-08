@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class Obec {
     @Id
-    private String kod;
+    private Integer kod;
 
     private String nazev;
 

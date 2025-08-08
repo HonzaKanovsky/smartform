@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class CastObce {
     @Id
-    private String kod;
+    private Integer kod;
 
     private String nazev;
 

@@ -59,15 +59,15 @@ class ObecServiceTest {
         CastiObciXml castiObciXml = mock(CastiObciXml.class);
 
         ObecXml obecXml = new ObecXml();
-        obecXml.setKod("123");
+        obecXml.setKod(123);
         obecXml.setNazev("TestObec");
 
         CastObceXml castObceXml = new CastObceXml();
-        castObceXml.setKod("321");
+        castObceXml.setKod(321);
         castObceXml.setNazev("CastTest");
         // Link castObce to obec
         ObecRef obecRef = new ObecRef();
-        obecRef.setKod("123");
+        obecRef.setKod(123);
         castObceXml.setObecRef(obecRef);
 
         // Setup lists
@@ -94,10 +94,10 @@ class ObecServiceTest {
         assertEquals(1, responseDto.getObecDtoList().size());
 
         ObecDto savedObec = responseDto.getObecDtoList().get(0);
-        assertEquals("123", savedObec.getKod());
+        assertEquals(123, savedObec.getKod());
         assertEquals("TestObec", savedObec.getNazev());
         assertEquals(1, savedObec.getCastiObce().size());
-        assertEquals("321", savedObec.getCastiObce().get(0).getKod());
+        assertEquals(321, savedObec.getCastiObce().get(0).getKod());
         assertEquals("CastTest", savedObec.getCastiObce().get(0).getNazev());
 
         // Verify mocks were called
@@ -127,7 +127,7 @@ class ObecServiceTest {
     void getObceWithCasti_returnsList() {
         List<Obec> obce = new ArrayList<>();
         Obec obec = new Obec();
-        obec.setKod("999");
+        obec.setKod(999);
         obec.setNazev("MockObec");
         obce.add(obec);
 
@@ -137,7 +137,7 @@ class ObecServiceTest {
 
         assertNotNull(response);
         assertEquals(1, response.getObecDtoList().size());
-        assertEquals("999", response.getObecDtoList().get(0).getKod());
+        assertEquals(999, response.getObecDtoList().get(0).getKod());
         assertEquals("MockObec", response.getObecDtoList().get(0).getNazev());
 
         verify(obecRepository).findAll();

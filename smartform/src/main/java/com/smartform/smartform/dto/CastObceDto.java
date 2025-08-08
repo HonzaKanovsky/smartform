@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CastObceDto {
-    private String kod;
+    private Integer kod;
     private String nazev;
 }
